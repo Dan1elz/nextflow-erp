@@ -17,12 +17,39 @@ namespace dotnet_api_erp.src.Domain.Entities.Base
 
         public static bool ValidateCPF(string cpf)
         {
-            // Validação do CPF
-            string cpfFormatado = FormatarCpf(cpf);
-            
+          
+            cpf = FormatarCpf(cpf);
 
-            return false;
-            // Implement CPF validation logic here
+            if (cpf.Length != 11)
+                return false;
+
+            bool allDigitsEqual = true;
+            for (int i = 1; i < 11 && allDigitsEqual; i++)
+            {
+                if (cpf[i] != cpf[0])
+                    allDigitsEqual = false;
+            }
+            if (allDigitsEqual)
+                return false;
+
+            // primeiro dígito verificador
+            int[] peso1 = { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            int soma = 0;
+            for (int i = 0; i < 9; i++)
+                soma += (cpf[i] - '0') * peso1[i];
+            int resto = soma % 11;
+            int digito1 = (resto < 2) ? 0 : 11 - resto;
+
+            // segundo dígito verificador
+            int[] peso2 = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            soma = 0;
+            for (int i = 0; i < 10; i++)
+                soma += (cpf[i] - '0') * peso2[i];
+            resto = soma % 11;
+            int digito2 = (resto < 2) ? 0 : 11 - resto;
+
+            // Verificar se os dígitos calculados são iguais aos dígitos do CPF
+            return (cpf[9] - '0' == digito1) && (cpf[10] - '0' == digito2);
         }
         public static string FormatarCpf(string cpf)
         {
