@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nP2YBXasTzQ=",
+  "dgSpecHash": "AdTTOzCYlzg=",
   "success": true,
-  "projectFilePath": "C:\\xampp\\htdocs\\projetos\\Dotnet\\Estudos\\dotnet-api-erp\\dotnet-api-erp.csproj",
+  "projectFilePath": "C:\\xampp\\htdocs\\projetos\\Dotnet\\Estudos\\feat_02\\nexflow-erp\\dotnet-api-erp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\danie\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.8\\microsoft.aspnetcore.openapi.8.0.8.nupkg.sha512",
     "C:\\Users\\danie\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

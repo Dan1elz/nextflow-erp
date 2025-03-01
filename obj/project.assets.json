@@ -465,11 +465,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\xampp\\htdocs\\projetos\\Dotnet\\Estudos\\dotnet-api-erp\\dotnet-api-erp.csproj",
+      "projectUniqueName": "C:\\xampp\\htdocs\\projetos\\Dotnet\\Estudos\\feat_02\\nexflow-erp\\dotnet-api-erp.csproj",
       "projectName": "dotnet-api-erp",
-      "projectPath": "C:\\xampp\\htdocs\\projetos\\Dotnet\\Estudos\\dotnet-api-erp\\dotnet-api-erp.csproj",
+      "projectPath": "C:\\xampp\\htdocs\\projetos\\Dotnet\\Estudos\\feat_02\\nexflow-erp\\dotnet-api-erp.csproj",
       "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
-      "outputPath": "C:\\xampp\\htdocs\\projetos\\Dotnet\\Estudos\\dotnet-api-erp\\obj\\",
+      "outputPath": "C:\\xampp\\htdocs\\projetos\\Dotnet\\Estudos\\feat_02\\nexflow-erp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\danie\\AppData\\Roaming\\NuGet\\NuGet.Config",
