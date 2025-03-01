@@ -460,24 +460,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\bento\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\danie\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\nexflow-erp\\dotnet-api-erp.csproj",
+      "projectUniqueName": "C:\\xampp\\htdocs\\projetos\\Dotnet\\Estudos\\feat_02\\nexflow-erp\\dotnet-api-erp.csproj",
       "projectName": "dotnet-api-erp",
-      "projectPath": "D:\\nexflow-erp\\dotnet-api-erp.csproj",
-      "packagesPath": "C:\\Users\\bento\\.nuget\\packages\\",
-      "outputPath": "D:\\nexflow-erp\\obj\\",
+      "projectPath": "C:\\xampp\\htdocs\\projetos\\Dotnet\\Estudos\\feat_02\\nexflow-erp\\dotnet-api-erp.csproj",
+      "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
+      "outputPath": "C:\\xampp\\htdocs\\projetos\\Dotnet\\Estudos\\feat_02\\nexflow-erp\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\bento\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\danie\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -485,6 +480,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -502,8 +498,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.200"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -537,7 +532,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
