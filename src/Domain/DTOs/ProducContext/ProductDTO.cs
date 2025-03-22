@@ -1,4 +1,4 @@
-﻿namespace dotnet_api_erp.src.Domain.DTOs.SalesContext
+﻿namespace dotnet_api_erp.src.Domain.DTOs.ProducContext
 {
     public class ProductDTO
     {

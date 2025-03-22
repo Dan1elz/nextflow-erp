@@ -1,8 +1,7 @@
 using dotnet_api_erp.src.Domain.Entities.Base;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
-using static dotnet_api_erp.src.Domain.DTOs.SalesContext.ProductDTO;
+using static dotnet_api_erp.src.Domain.DTOs.ProducContext.ProductDTO;
 
 namespace dotnet_api_erp.src.Domain.Entities.ProductContext
 {
@@ -32,6 +31,7 @@ namespace dotnet_api_erp.src.Domain.Entities.ProductContext
 
         [Required(ErrorMessage = "A validade é obrigatória")]
         public DateTime Validity { get; private set; } = dto.Validity;
+        public virtual ICollection<CategoryProduct> CategoryProduct { get; set; } = [];
         public void Update(UpdateProductDTO dto)
         {
             Description = dto.Description;

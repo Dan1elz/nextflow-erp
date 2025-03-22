@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("dotnet-api-erp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1accfae0cbf89be60642db1d5bf46ae62aeac6e4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e9ee2069d92bc630b6ac8915914a30ab12206495")]
 [assembly: System.Reflection.AssemblyProductAttribute("dotnet-api-erp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("dotnet-api-erp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
