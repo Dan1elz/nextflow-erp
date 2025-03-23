@@ -9,9 +9,10 @@ namespace dotnet_api_erp.src.Domain.Entities.UserContext
     {
         [MinLength(8, ErrorMessage = "A Senha deve ter no minimo 8 caracteres")]
         [JsonIgnore] public string? Password { get; set; } = null;
-
+        public virtual ICollection<Address> Addresses { get; set; } = [];
+        public virtual ICollection<Contact> Contacts { get; set; } = [];
         private User() : base(new CreatePersonDTO(string.Empty, string.Empty, string.Empty, null)) { }
-        public User(CreatePersonDTO dto) : base(new CreatePersonDTO(dto.Name, dto.Cpf, dto.Email, dto.BirthDate)) {}
+        public User(CreatePersonDTO dto) : base(new CreatePersonDTO(dto.Name, FormatarCpf(dto.Cpf), dto.Email, dto.BirthDate)) {} 
         public void Update(UpdateUserDTO dto)
         {
             base.Name = dto.Name;

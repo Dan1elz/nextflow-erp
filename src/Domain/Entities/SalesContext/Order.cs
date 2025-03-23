@@ -16,6 +16,7 @@ namespace dotnet_api_erp.src.Domain.Entities.SalesContext
         [Range(0.01, double.MaxValue, ErrorMessage = "O valor total deve ser maior que zero.")]
         [Required(ErrorMessage = "O valor total é obrigatório.")]
         public double TotalAmount {get; private set;}
+        public virtual ICollection<OrderItem> OrderItems { get; set; } = [];
         private Order() { }
         public Order(CreateOrderDTO dto) : base()
         {

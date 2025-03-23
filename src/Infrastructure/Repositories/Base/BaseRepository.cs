@@ -38,9 +38,9 @@ namespace dotnet_api_erp.src.Infrastructure.Repositories.Base
 
             return await query.FirstOrDefaultAsync(ct);
         }
-        public virtual async Task<TEntity?> GetByIdAsync(int Id, CancellationToken ct, Func<IQueryable<TEntity>, IQueryable<TEntity>>? includeExpression = null)
+        public virtual async Task<TEntity?> GetByIdAsync(Guid Id, CancellationToken ct, Func<IQueryable<TEntity>, IQueryable<TEntity>>? includeExpression = null)
         {
-            IQueryable<TEntity> query = _context.Set<TEntity>().Where(e => EF.Property<int>(e, "Id") == Id);
+            IQueryable<TEntity> query = _context.Set<TEntity>().Where(e => EF.Property<Guid>(e, "Id") == Id);
 
             if (includeExpression != null)
                 query = includeExpression(query);

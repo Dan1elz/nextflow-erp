@@ -31,6 +31,7 @@ namespace dotnet_api_erp.src.Domain.Entities.ProductContext
         [Required(ErrorMessage = "A validade é obrigatória")]
         public DateOnly Validity { get; private set; }
         public virtual ICollection<CategoryProduct> CategoryProduct { get; set; } = [];
+        public virtual ICollection<StockMovement> StockMovement { get; set; } = [];
         private Product(){ }
         public Product(CreateProductDTO dto) : base() 
         {

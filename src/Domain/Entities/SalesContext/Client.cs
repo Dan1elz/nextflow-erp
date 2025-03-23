@@ -18,8 +18,9 @@ namespace dotnet_api_erp.src.Domain.Entities.SalesContext
         [Required(ErrorMessage = "O endereço é obrigatório.")]
         public string Address { get; private set; } = string.Empty;
 
+        public virtual ICollection<Order> Orders { get; set; } = [];
         public Client() : base(new CreatePersonDTO(string.Empty, string.Empty, string.Empty, null)) { }
-        public Client(CreateClientDTO dto) : base(new CreatePersonDTO(dto.Name, dto.Cpf, dto.Email, dto.BirthDate))
+        public Client(CreateClientDTO dto) : base(new CreatePersonDTO(dto.Name, FormatarCpf(dto.Cpf), dto.Email, dto.BirthDate))
         {
             this.Phone = dto.Phone;
             this.ZipCode = dto.ZipCode;
