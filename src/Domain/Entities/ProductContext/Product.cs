@@ -7,8 +7,7 @@ namespace dotnet_api_erp.src.Domain.Entities.ProductContext
 {
     public class Product(CreateProductDTO dto) : BaseEntity
     {
-        [ForeignKey("Supplier")]
-        [Required(ErrorMessage = "Por favor, insira o ID do fornecedor.")]
+        [ForeignKey("Supplier"), Required(ErrorMessage = "Por favor, insira o ID do fornecedor.")]
         public Guid SupplierId { get; private init; }  = dto.SupplierId;
         public virtual Supplier? Supplier { get; set; }
 

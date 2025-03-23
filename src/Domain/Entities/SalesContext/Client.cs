@@ -16,8 +16,7 @@ namespace dotnet_api_erp.src.Domain.Entities.SalesContext
         [StringLength(150, ErrorMessage = "O endereço deve ter no máximo 150 caracteres.")]
         [Required(ErrorMessage = "O endereço é obrigatório.")]
         public string Address { get; private set; } = dto.ZipCode;
-
-          public void Update(UpdateClientDTO dto)
+        public void Update(UpdateClientDTO dto)
         {
             base.Name = dto.Name ?? base.Name;
             base.Cpf = dto.Cpf ?? base.Cpf;
