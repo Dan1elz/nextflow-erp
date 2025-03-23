@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace dotnet_api_erp.src.Infrastructure.Repositories.Base
 {
-    public abstract class BaseRepository<TEntity>(ApplicationDbContext context) : IRepositoryBase<TEntity> where TEntity : class
+    public abstract class BaseRepository<TEntity>(ApplicationDbContext context) : IBaseRepository<TEntity> where TEntity : class
     {
         protected readonly ApplicationDbContext _context = context;
         protected readonly DbSet<TEntity> DbSet = context.Set<TEntity>();
@@ -25,9 +25,7 @@ namespace dotnet_api_erp.src.Infrastructure.Repositories.Base
             IQueryable<TEntity> query = _context.Set<TEntity>().Where(predicate);
 
             if (includeExpression != null)
-            {
-            query = includeExpression(query);
-            }
+                query = includeExpression(query);
 
             return await query.OrderBy(e => EF.Property<int>(e, "Id")).Skip(offset).Take(limit).ToListAsync(ct);
         }
@@ -36,9 +34,7 @@ namespace dotnet_api_erp.src.Infrastructure.Repositories.Base
             IQueryable<TEntity> query = _context.Set<TEntity>().Where(predicate);
 
             if (includeExpression != null)
-            {
-            query = includeExpression(query);
-            }
+                query = includeExpression(query);
 
             return await query.FirstOrDefaultAsync(ct);
         }
@@ -47,9 +43,7 @@ namespace dotnet_api_erp.src.Infrastructure.Repositories.Base
             IQueryable<TEntity> query = _context.Set<TEntity>().Where(e => EF.Property<int>(e, "Id") == Id);
 
             if (includeExpression != null)
-            {
-            query = includeExpression(query);
-            }
+                query = includeExpression(query);
 
             return await query.FirstOrDefaultAsync(ct);
         }
@@ -75,9 +69,7 @@ namespace dotnet_api_erp.src.Infrastructure.Repositories.Base
         public virtual async Task UpdateRange(IEnumerable<TEntity> entities, CancellationToken ct)
         {
             if (entities == null || !entities.Any())
-            { 
                 throw new NotFoundException("A lista de entidades não pode estar vazia: " + nameof(entities));
-            }
 
             _context.Set<TEntity>().UpdateRange(entities);
             await _context.SaveChangesAsync(ct);

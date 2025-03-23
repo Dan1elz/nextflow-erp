@@ -5,7 +5,7 @@ using dotnet_api_erp.src.Infrastructure.Repositories.Base;
 
 namespace dotnet_api_erp.src.Infrastructure.Repositories.ProductContext
 {
-    public class CategoryRepository(ApplicationDbContext context) :  BaseRepository<Category>(context), ICategoryRepository
+    public class CategoryRepository(ApplicationDbContext context) : BaseRepository<Category>(context), ICategoryRepository
     {
         
     }

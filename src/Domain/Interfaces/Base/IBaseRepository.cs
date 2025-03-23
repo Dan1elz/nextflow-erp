@@ -2,7 +2,7 @@ using System.Linq.Expressions;
 
 namespace dotnet_api_erp.src.Domain.Interfaces.Base
 {
-    public interface IRepositoryBase<TEntity> where TEntity : class
+    public interface IBaseRepository<TEntity> where TEntity : class
     {
         // Metodos de leitura
         Task<TEntity?> GetByIdAsync(int Id, CancellationToken ct, Func<IQueryable<TEntity>, IQueryable<TEntity>>? includeExpression = null);

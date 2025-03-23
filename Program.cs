@@ -5,6 +5,8 @@ using dotnet_api_erp.src.Domain.Interfaces.ProductContext;
 using dotnet_api_erp.src.Domain.Interfaces.SalesContext;
 using dotnet_api_erp.src.Domain.Interfaces.UserContext;
 using dotnet_api_erp.src.Infrastructure.Data;
+using dotnet_api_erp.src.Infrastructure.Repositories.ProductContext;
+using dotnet_api_erp.src.Infrastructure.Repositories.SalesContext;
 using dotnet_api_erp.src.Infrastructure.Repositories.UserContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -102,21 +104,21 @@ namespace dotnet_api_erp
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             builder.Services.AddScoped<IContactRepository, ContactRepository>();
-            builder.Services.AddScoped<IAddressRepository, IAddressRepository>();
+            builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 
             // CONTEXTO DE SALES
-            builder.Services.AddScoped<ISaleRepository, ISaleRepository>();
-            builder.Services.AddScoped<IPaymentRepository, IPaymentRepository>();
-            builder.Services.AddScoped<IOrderRepository, IOrderRepository>();
-            builder.Services.AddScoped<IOrderItemRepository, IOrderItemRepository>();
-            builder.Services.AddScoped<IClientRepository, IClientRepository>();
+            builder.Services.AddScoped<ISaleRepository, SaleRepository>();
+            builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+            builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+            builder.Services.AddScoped<IClientRepository, ClientRepository>();
 
             // CONTEXTO DE PRODUCT
-            builder.Services.AddScoped<ISuppliersRepository, ISuppliersRepository>();
-            builder.Services.AddScoped<IStockMovementRepository, IStockMovementRepository>();
-            builder.Services.AddScoped<IProductRepository, IProductRepository>();
-            builder.Services.AddScoped<ICategoryRepository, ICategoryRepository>();
-            builder.Services.AddScoped<ICategoryProductRepository, ICategoryProductRepository>();
+            builder.Services.AddScoped<ISuppliersRepository, SuppliersRepository>();
+            builder.Services.AddScoped<IStockMovementRepository, StockMovementRepository>();
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<ICategoryProductRepository, CategoryProductRepository>();
 
 
             builder.Services.AddScoped<JwtUtils>();

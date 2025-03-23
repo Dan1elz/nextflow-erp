@@ -13,7 +13,7 @@ namespace dotnet_api_erp.src.Domain.Entities.Base
 
         [StringLength(11, MinimumLength = 11, ErrorMessage = "O CPF deve ter exatamente 14 caracteres.")]
         public string Cpf { get; protected set; } = string.Empty; 
-        public DateOnly BirthDate { get; protected set; } = createPersonDTO.BirthDate;
+        public DateOnly? BirthDate { get; protected set; } = createPersonDTO.BirthDate;
 
         public static bool ValidateCPF(string cpf)
         {
