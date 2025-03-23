@@ -9,8 +9,7 @@ namespace dotnet_api_erp.src.Domain.Entities.ProductContext
 {
     public class StockMovement(CreateStockMovementDTO dto) : BaseEntity
     {
-        [ForeignKey("Product")]
-        [Required(ErrorMessage = "Por favor, insira o ID do produto.")]
+        [ForeignKey("Product"), Required(ErrorMessage = "Por favor, insira o ID do produto.")]
         public Guid ProductId { get; private init; }  = dto.ProductId;
         public virtual Product? Product { get; set; }
 
@@ -30,6 +29,6 @@ namespace dotnet_api_erp.src.Domain.Entities.ProductContext
         public int Quantity { get; private init; } = dto.Quantity;
 
         [Range(0.01, double.MaxValue, ErrorMessage = "A quantidade deve ser maior que zero.")]
-        public decimal Quote { get; private init; } = dto.Quote;   
+        public double Quote { get; private init; } = dto.Quote;   
     }
 }

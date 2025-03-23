@@ -20,6 +20,7 @@ namespace dotnet_api_erp.src.Domain.Entities.UserContext
 
         [StringLength(100, ErrorMessage = "O endereço de email deve ter no máximo 100 caracteres.")]
         [EmailAddress(ErrorMessage = "O endereço de email não é válido.")]
+        [Required(ErrorMessage = "O endereço de email é obrigatório.")]
         public string? Email { get; private set; } =  dto.Email;
         public bool IsPrimary { get; private set; } = dto.IsPrimary;
 

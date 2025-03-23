@@ -8,13 +8,14 @@ namespace dotnet_api_erp.src.Domain.Entities.SalesContext
 {
     public class Order(CreateOrderDTO dto) : BaseEntity
     {
-        [ForeignKey("Client")]
-        [Required(ErrorMessage = "Por favor, insira o ID do Cliente.")]
+        [ForeignKey("Client"), Required(ErrorMessage = "Por favor, insira o ID do Cliente.")]
         public Guid ClientId { get; private set; }  = dto.ClientId;
         public virtual Client? Client { get; set; }
+        [Required(ErrorMessage = "O Status do Pedido é obrigatório.")]
         public OrderStatus OrderStatus {get; set;} = OrderStatus.PendingPayment;
+        [Range(0.01, double.MaxValue, ErrorMessage = "O valor total deve ser maior que zero.")]
+        [Required(ErrorMessage = "O valor total é obrigatório.")]
         public double TotalAmount {get; private set;} = dto.TotalAmount;
-
         public void Update(UpdateOrderDTO dto)
         {
             OrderStatus = dto.Status;

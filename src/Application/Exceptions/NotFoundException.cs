@@ -1,4 +1,4 @@
-namespace boilerplate_backend.src.Application.Exceptions
+namespace dotnet_api_erp.src.Application.Exceptions
 {
     public class NotFoundException : Exception
     {
