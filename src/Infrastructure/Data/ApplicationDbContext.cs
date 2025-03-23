@@ -7,12 +7,13 @@ namespace dotnet_api_erp.src.Infrastructure.Data
 {
     public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
     {
+
         // CONTEXTO DE USER
         public DbSet<User> Users { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Address> Addresses { get; set; }
-        
+
         // CONTEXTO DE PRODUCT
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -33,16 +34,18 @@ namespace dotnet_api_erp.src.Infrastructure.Data
                 entity.HasIndex(u => u.Email).IsUnique();
                 entity.HasIndex(u => u.Cpf).IsUnique();
             });
+
             modelBuilder.Entity<Client>(entity => {
                 entity.HasIndex(u => u.Email).IsUnique();
                 entity.HasIndex(u => u.Cpf).IsUnique();
             });
+
             modelBuilder.Entity<Supplier>(entity => {
                 entity.HasIndex(u => u.Email).IsUnique();
                 entity.HasIndex(u => u.CNPJ).IsUnique();
             });
-            
-         base.OnModelCreating(modelBuilder);
+
+            base.OnModelCreating(modelBuilder);
         }
-    }   
+    }
 }
