@@ -11,11 +11,11 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AddressController(AddressService service) : ControllerBase
     {
         private readonly AddressService _service = service;
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> PostAddress(CreateAddressDTO Address, CancellationToken ct)
         {
@@ -32,8 +32,6 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
 
             throw new BadRequestException("Erro ao criar endereço");
         }
-
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAddresses(CancellationToken ct, [FromQuery] int offset = 0, [FromQuery] int pageSize = 10)
         {
@@ -43,8 +41,6 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
             
             throw new BadRequestException("Erro ao pegar dados do endereço");
         }
-
-        [Authorize]
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetAddressById(Guid Id, CancellationToken ct)
         {
@@ -60,9 +56,7 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
             }
 
             throw new BadRequestException("Erro ao pegar dados do endereço");
-        }
-        
-        [Authorize]
+        }  
         [HttpPut("{Id}")]
         public async Task<IActionResult> UpdateAddress(Guid Id, UpdateAddressDTO Address, CancellationToken ct)
         {
@@ -79,8 +73,6 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
 
             throw new BadRequestException("Erro ao atualizar dados do endereço");
         }
-
-        [Authorize]
         [HttpDelete]
         public async Task<IActionResult> DeleteAddress(ListIdsGuidDto dto, CancellationToken ct)
         {
@@ -95,8 +87,6 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
                 Message = "Sucesso ao excluir endereços",
             });
         }
-
-        [Authorize]
         [HttpGet("Exportar")]
         public async Task<IActionResult> Exportar(
             [FromQuery] ListIdsGuidDto? dto,
@@ -114,7 +104,6 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
             }
             throw new BadRequestException("Erro ao exportar dados");
         }
-        [Authorize]
         [HttpGet("ExportarBase")]
         public async Task<IActionResult> ExportarBase()
         {
@@ -130,8 +119,6 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
            }
            throw new BadRequestException("Erro ao exportar dados");
         }
-
-
         [HttpPost("Importar")]
         public async Task<IActionResult> Importar([FromBody] FileDto request, CancellationToken ct)
         {

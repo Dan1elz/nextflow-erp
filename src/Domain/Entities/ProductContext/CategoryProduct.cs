@@ -8,11 +8,11 @@ namespace dotnet_api_erp.src.Domain.Entities.ProductContext
     public class CategoryProduct: BaseEntity
     {
         [ForeignKey("Category"), Required(ErrorMessage = "Por favor, insira o ID da categoria.")]
-        public Guid CategoryId { get; private init; }
+        public Guid CategoryId { get; init; }
         public virtual Category? Category { get; set; }
 
         [ForeignKey("Product"), Required(ErrorMessage = "Por favor, insira o ID do produto.")]
-        public Guid ProductId { get; private init; }
+        public Guid ProductId { get; init; }
         public virtual Product? Product { get; set; }
         private CategoryProduct() { }
         public CategoryProduct(CreateCategoryProductDTO dto)

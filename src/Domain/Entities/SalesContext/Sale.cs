@@ -9,11 +9,11 @@ namespace dotnet_api_erp.src.Domain.Entities.SalesContext
     public class Sale : BaseEntity
     {
         [ForeignKey("Order"), Required(ErrorMessage = "Por favor, insira o ID da Ordem de Venda.")]
-        public Guid OrderId { get; private init; }
+        public Guid OrderId { get; init; }
         public virtual Order? Order { get; set; }
 
         [ForeignKey("User"), Required(ErrorMessage = "Por favor insira o Id do Usuario")]
-        public Guid UserId {get; private set;}
+        public Guid UserId {get; set;}
         public virtual User? User {get; set;}
         private Sale() { }
         public Sale(CreateSaleDTO dto) : base()

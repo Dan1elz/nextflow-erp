@@ -112,7 +112,6 @@ namespace dotnet_api_erp.src.Application.Services.UserContext
             byte[]? userBase = data.GenerateExcelFromData(selectedData);
             return Task.FromResult(userBase);
         }
-
         public async Task Importar(FileDto file, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(file.Base64))

@@ -42,15 +42,15 @@ namespace dotnet_api_erp.src.Application.Services.Base
         public virtual async Task DeleteAsync(Guid Id, CancellationToken ct) //DELETE
         {
             TEntity entity = await GetByIdAsync(Id, ct);
-            var propertyInfo = typeof(TEntity).GetProperty("Active");
-            if (propertyInfo != null && propertyInfo.PropertyType == typeof(bool))
+            var deleteMethod = typeof(TEntity).GetMethod("Delete", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
+            if (deleteMethod != null)
             {
-                propertyInfo.SetValue(entity, false);
-                await _repository.Update(entity, ct);
+            deleteMethod.Invoke(entity, null);
+            await _repository.Update(entity, ct);
             }
             else
             {
-                await _repository.Remove(entity, ct);
+            await _repository.Remove(entity, ct);
             }
         }
         public virtual Task DeleteRangeAsync(List<Guid> Ids, CancellationToken ct)
