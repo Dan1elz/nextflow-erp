@@ -12,6 +12,7 @@ using dotnet_api_erp.src.Infrastructure.Repositories.SalesContext;
 using dotnet_api_erp.src.Infrastructure.Repositories.UserContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
@@ -96,39 +97,42 @@ namespace dotnet_api_erp
             builder.Services.AddEndpointsApiExplorer();
 
             // *** REGISTRO DE DEPENDÊNCIAS ***
+
+            // *** CONTEXTO DE USER - SERVICES ***
             builder.Services.AddScoped<UserService>();
             builder.Services.AddScoped<AddressService>();
             builder.Services.AddScoped<ContactService>();
             builder.Services.AddScoped<RefreshTokenService>();
             
+            // *** CONTEXTO DE PRODUCT - SERVICES ***
             builder.Services.AddScoped<CategoryService>();
             builder.Services.AddScoped<ProductService>();
             builder.Services.AddScoped<SupplierService>();
             builder.Services.AddScoped<StockMovementService>();
-            
+
             builder.Services.AddHttpContextAccessor();
 
-            // CONTEXTO DE USER
+            // *** CONTEXTO DE USER - REPOSITORIES ***
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             builder.Services.AddScoped<IContactRepository, ContactRepository>();
             builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 
-            // CONTEXTO DE SALES
+            // *** CONTEXTO DE SALES - REPOSITORIES ***
             builder.Services.AddScoped<ISaleRepository, SaleRepository>();
             builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
             builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
             builder.Services.AddScoped<IClientRepository, ClientRepository>();
 
-            // CONTEXTO DE PRODUCT
+            // *** CONTEXTO DE PRODUCT - REPOSITORIES ***
             builder.Services.AddScoped<ISuppliersRepository, SuppliersRepository>();
             builder.Services.AddScoped<IStockMovementRepository, StockMovementRepository>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<ICategoryProductRepository, CategoryProductRepository>();
 
-
+            // *** UTILITARIOS ***
             builder.Services.AddScoped<JwtUtils>();
             builder.Services.AddScoped<ImageUtils>();
 
@@ -151,13 +155,22 @@ namespace dotnet_api_erp
                 app.UseHsts();
             }
 
+             // *** CONFIGURAÇÃO DE ARQUIVOS ESTÁTICOS ***
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
+                RequestPath = "/assets"
+            });	
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseCors();
-
             app.UseRouting();
+
+            // *** MIDDLEWARES ***
             app.UseMiddleware<GlobalExceptionMiddleware>();
+            
+            // *** AUTENTICAÇÃO E AUTORIZAÇÃO ***
             app.UseAuthentication();
             app.UseAuthorization();
 

@@ -1,6 +1,7 @@
 using dotnet_api_erp.src.Application.DTOs;
 using dotnet_api_erp.src.Application.Exceptions;
 using dotnet_api_erp.src.Application.Services.ProductContext;
+using dotnet_api_erp.src.Application.Services.UserContext;
 using dotnet_api_erp.src.Domain.Entities.ProductContext;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,14 +13,16 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class ProductController(ProductService service) : ControllerBase
+    public class ProductController(ProductService service,  RefreshTokenService token) : ControllerBase
     {
         private readonly ProductService _service = service;
+        private readonly RefreshTokenService _token = token;
 
         [HttpPost]
         public async Task<IActionResult> PostProduct([FromForm] CreateProductDto Product, CancellationToken ct)
         {
-            var response = await _service.AddAsync(Product, ct);
+            var token = await _token.AuthenticationToken(_token.GetTokenToString(HttpContext.Request.Headers.Authorization.ToString()), ct);
+            var response = await _service.AddAsync(Product, token!, ct);
             if (response != null)
             {
                 return Ok(new ApiResponse<Product>
