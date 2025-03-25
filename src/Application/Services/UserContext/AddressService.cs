@@ -17,7 +17,7 @@ namespace dotnet_api_erp.src.Application.Services.UserContext
     {
         public async Task<Address> UpdateAsync(Guid Id, UpdateAddressDTO address, CancellationToken ct)
         {
-            var addressToUpdate = await _repository.GetByIdAsync(Id, ct) ?? throw new NotFoundException("Usuario não encontrado");
+            var addressToUpdate = await _repository.GetByIdAsync(Id, ct) ?? throw new NotFoundException("Endereço não encontrado");
 
             addressToUpdate.Update(address);
             await _repository.Update(addressToUpdate, ct);
@@ -62,29 +62,29 @@ namespace dotnet_api_erp.src.Application.Services.UserContext
         }
         public Task<byte[]> ExportarBase()
         {
-            var addresses = new List<Address>
-            {
-            new(new CreateAddressDTO(
-                UserId: Guid.NewGuid(),
-                Description: "Sample Description",
-                Street: "Sample Street",
-                Number: "123",
-                District: "Sample District",
-                City: "Sample City",
-                State: "Sample State",
-                Complement: "Sample Complement",
-                ZipCode: "12345-678",
-                IsPrimary: true
-            ))
-            {
-                User = new User(new CreatePersonDTO(
-                Name: "John Doe",
-                Cpf: "123.456.789-00",
-                Email: "johndoe@example.com",
-                BirthDate: new DateOnly(1990, 1, 1)
+            List<Address> addresses =
+            [
+                new(new CreateAddressDTO(
+                    UserId: Guid.NewGuid(),
+                    Description: "Sample Description",
+                    Street: "Sample Street",
+                    Number: "123",
+                    District: "Sample District",
+                    City: "Sample City",
+                    State: "Sample State",
+                    Complement: "Sample Complement",
+                    ZipCode: "12345-678",
+                    IsPrimary: true
                 ))
-            }
-            };
+                {
+                    User = new User(new CreatePersonDTO(
+                    Name: "John Doe",
+                    Cpf: "123.456.789-00",
+                    Email: "johndoe@example.com",
+                    BirthDate: new DateOnly(1990, 1, 1)
+                    ))
+                }
+            ];
 
             var selectedData = addresses.Select(x => new
             {
@@ -104,13 +104,11 @@ namespace dotnet_api_erp.src.Application.Services.UserContext
             byte[]? userBase = data.GenerateExcelFromData(selectedData);
             return Task.FromResult(userBase);
         }
-
         public async Task Importar(FileDto file, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(file.Base64))
                 throw new  NotFoundException("Arquivo não encontrado.");
             
-
             var data = new FileProcessorUtils<Address>(_context);
             await data.ImportFileAsync(file, null, ct);
         }

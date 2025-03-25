@@ -34,7 +34,6 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
 
             throw new BadRequestException("Erro ao criar usuario");
         }
-
         [HttpPost("Login")]
         public async Task<IActionResult> LoginUser(LoginUserDto user, CancellationToken ct)
         {
@@ -51,7 +50,6 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
 
             throw new BadRequestException("Erro ao logar usuario");
         }
-
         [Authorize]
         [HttpPost("Logout")]
         public async Task<IActionResult> LogoutUser(CancellationToken ct)
@@ -65,7 +63,6 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
                 Message = "Sucesso ao deslogar usuário",
             });
         }
-        
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetUsers(CancellationToken ct, [FromQuery] int offset = 0, [FromQuery] int pageSize = 10)
@@ -76,7 +73,6 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
             
             throw new BadRequestException("Erro ao pegar dados do usuário");
         }
-
         [Authorize]
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetUserById(Guid Id, CancellationToken ct)
@@ -94,7 +90,6 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
 
             throw new BadRequestException("Erro ao pegar dados do usuário");
         }
-        
         [Authorize]
         [HttpPut("{Id}")]
         public async Task<IActionResult> UpdateUser(Guid Id, UpdateUserDTO user, CancellationToken ct)
@@ -129,7 +124,6 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
                 Data = newToken!
             });
         }
-
         [Authorize]
         [HttpDelete]
         public async Task<IActionResult> DeleteUser(ListIdsGuidDto dto, CancellationToken ct)
@@ -145,7 +139,6 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
                 Message = "Sucesso ao excluir usuarios",
             });
         }
-
         [Authorize]
         [HttpGet("Exportar")]
         public async Task<IActionResult> Exportar(
@@ -180,8 +173,7 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
            }
            throw new BadRequestException("Erro ao exportar dados");
         }
-
-
+        [Authorize]
         [HttpPost("Importar")]
         public async Task<IActionResult> ImportarUsers([FromBody] FileDto request, CancellationToken ct)
         {

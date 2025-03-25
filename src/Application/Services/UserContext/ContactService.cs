@@ -17,7 +17,7 @@ namespace dotnet_api_erp.src.Application.Services.UserContext
     {
         public async Task<Contact> UpdateAsync(Guid Id, UpdateContactDTO contact, CancellationToken ct)
         {
-            var contactToUpdate = await _repository.GetByIdAsync(Id, ct) ?? throw new NotFoundException("Usuario não encontrado");
+            var contactToUpdate = await _repository.GetByIdAsync(Id, ct) ?? throw new NotFoundException("Contato não encontrado");
 
             contactToUpdate.Update(contact);
             await _repository.Update(contactToUpdate, ct);
@@ -57,24 +57,24 @@ namespace dotnet_api_erp.src.Application.Services.UserContext
         }
         public Task<byte[]> ExportarBase()
         {
-            var contacts = new List<Contact>
-            {
-            new(new CreateContactDTO(
-                UserId: Guid.NewGuid(),
-                Description: "Sample Description",
-                Phone: "(10) 1234-5678",
-                Email: "johndoe@example.com",
-                IsPrimary: true
-            ))
-            {
-                User = new User(new CreatePersonDTO(
-                Name: "John Doe",
-                Cpf: "123.456.789-00",
-                Email: "johndoe@example.com",
-                BirthDate: new DateOnly(1990, 1, 1)
+            List<Contact> contacts =
+            [
+                new(new CreateContactDTO(
+                    UserId: Guid.NewGuid(),
+                    Description: "Sample Description",
+                    Phone: "(10) 1234-5678",
+                    Email: "johndoe@example.com",
+                    IsPrimary: true
                 ))
-            }
-            };
+                {
+                    User = new User(new CreatePersonDTO(
+                    Name: "John Doe",
+                    Cpf: "123.456.789-00",
+                    Email: "johndoe@example.com",
+                    BirthDate: new DateOnly(1990, 1, 1)
+                    ))
+                }
+            ];
 
             var selectedData = contacts.Select(x => new
             {
@@ -89,12 +89,10 @@ namespace dotnet_api_erp.src.Application.Services.UserContext
             byte[]? userBase = data.GenerateExcelFromData(selectedData);
             return Task.FromResult(userBase);
         }
-
         public async Task Importar(FileDto file, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(file.Base64))
                 throw new  NotFoundException("Arquivo não encontrado.");
-            
 
             var data = new FileProcessorUtils<Contact>(_context);
             await data.ImportFileAsync(file, null, ct);

@@ -9,14 +9,14 @@ namespace dotnet_api_erp.src.Domain.Entities.SalesContext
     public class Payment : BaseEntity
     {
         [ForeignKey("Sale"), Required(ErrorMessage = "Por favor, insira o ID da Venda.")]
-        public Guid SaleId { get; private init; }
+        public Guid SaleId { get; init; }
         public virtual Sale? Sale { get; set; }
         [Required(ErrorMessage = "Por favor, o Metodo de Pagamento é obrigatório.")]
-        public PaymentMethod PaymentMethod {get; private init;}
+        public PaymentMethod PaymentMethod {get; init;}
         
         [Range(0.0, double.MaxValue, ErrorMessage = "O preço deve ser um valor positivo")]
         [Required(ErrorMessage = "Por favor, insira o valor do pagamento.")]
-        public double Amount { get; private set; }
+        public double Amount { get; set; }
         private Payment() { }
         public Payment(CreatePaymentDTO dto) : base()
         {

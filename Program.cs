@@ -1,5 +1,7 @@
 using System.Text;
 using dotnet_api_erp.src.API.Middlewares;
+using dotnet_api_erp.src.Application.Services.ProductContext;
+using dotnet_api_erp.src.Application.Services.UserContext;
 using dotnet_api_erp.src.Application.Utils;
 using dotnet_api_erp.src.Domain.Interfaces.ProductContext;
 using dotnet_api_erp.src.Domain.Interfaces.SalesContext;
@@ -94,10 +96,16 @@ namespace dotnet_api_erp
             builder.Services.AddEndpointsApiExplorer();
 
             // *** REGISTRO DE DEPENDÊNCIAS ***
-            // builder.Services.AddScoped<UserService>();
-            // builder.Services.AddScoped<PermissionService>();
-            // builder.Services.AddScoped<RefreshTokenService>();
-
+            builder.Services.AddScoped<UserService>();
+            builder.Services.AddScoped<AddressService>();
+            builder.Services.AddScoped<ContactService>();
+            builder.Services.AddScoped<RefreshTokenService>();
+            
+            builder.Services.AddScoped<CategoryService>();
+            builder.Services.AddScoped<ProductService>();
+            builder.Services.AddScoped<SupplierService>();
+            builder.Services.AddScoped<StockMovementService>();
+            
             builder.Services.AddHttpContextAccessor();
 
             // CONTEXTO DE USER
@@ -122,6 +130,7 @@ namespace dotnet_api_erp
 
 
             builder.Services.AddScoped<JwtUtils>();
+            builder.Services.AddScoped<ImageUtils>();
 
             // *** CONFIGURAÇÃO DO APP ***
             var app = builder.Build();

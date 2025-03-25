@@ -8,15 +8,15 @@ namespace dotnet_api_erp.src.Domain.Entities.SalesContext
     {
         [StringLength(20, ErrorMessage = "O número de telefone deve ter no máximo 20 caracteres.")]
         [Required(ErrorMessage = "O telefone é obrigatório.")]
-        public string Phone { get; private set; } = string.Empty;
+        public string Phone { get; set; } = string.Empty;
         
         [StringLength(15, ErrorMessage = "O CEP deve ter no máximo 15 caracteres.")]
         [Required(ErrorMessage = "O CEP é obrigatório.")]
-        public string ZipCode { get; private set; } = string.Empty;
+        public string ZipCode { get; set; } = string.Empty;
         
         [StringLength(150, ErrorMessage = "O endereço deve ter no máximo 150 caracteres.")]
         [Required(ErrorMessage = "O endereço é obrigatório.")]
-        public string Address { get; private set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
 
         public virtual ICollection<Order> Orders { get; set; } = [];
         public Client() : base(new CreatePersonDTO(string.Empty, string.Empty, string.Empty, null)) { }
