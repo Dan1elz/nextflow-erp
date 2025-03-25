@@ -53,9 +53,14 @@ namespace dotnet_api_erp.src.Domain.Entities.ProductContext
             Name = dto.Name;
             Description = dto.Description;
             Image = dto.Image;
-            Quantity = dto.Quantity;
             Price = dto.Price;
             Validity = dto.Validity;
+            base.Update();
+        }
+
+        public void SetMovementStock(int Quantity)
+        {
+            this.Quantity = Quantity;
             base.Update();
         }
     }

@@ -5,6 +5,8 @@ using dotnet_api_erp.src.Application.Mappers;
 using dotnet_api_erp.src.Application.Services.Base;
 using dotnet_api_erp.src.Application.Utils;
 using dotnet_api_erp.src.Domain.Entities.ProductContext;
+using dotnet_api_erp.src.Domain.Entities.UserContext;
+using dotnet_api_erp.src.Domain.Enums;
 using dotnet_api_erp.src.Domain.Interfaces.ProductContext;
 using dotnet_api_erp.src.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +19,7 @@ using static dotnet_api_erp.src.Domain.DTOs.ProducContext.SuppliersDTO;
 
 namespace dotnet_api_erp.src.Application.Services.ProductContext
 {
-    public class ProductService(IProductRepository repository, ImageUtils imageUtils, CategoryService categoryService, ApplicationDbContext context) : BaseService<Product, IProductRepository>(repository, context)
+    public class ProductService(IProductRepository repository,IStockMovementRepository stockMovementRepository, ImageUtils imageUtils, CategoryService categoryService, ApplicationDbContext context) : BaseService<Product, IProductRepository>(repository, context)
     {
         private readonly ImageUtils _imageUtils = imageUtils;
         private readonly CategoryService _categoryService = categoryService;
@@ -39,7 +41,7 @@ namespace dotnet_api_erp.src.Application.Services.ProductContext
 
             return productToUpdate;
         }
-        public async Task<Product> AddAsync(CreateProductDto product, CancellationToken ct)
+        public async Task<Product> AddAsync(CreateProductDto product, RefreshToken token, CancellationToken ct)
         {
             var fileName = await _imageUtils.SaveImg(product.Image, filePath, ct);
 
@@ -48,7 +50,19 @@ namespace dotnet_api_erp.src.Application.Services.ProductContext
             await _repository.AddAsync(productEntity, ct);
 
             if (product.CategoryIds != null)
-                await _categoryService.AddRangeAsync(product.CategoryIds, productEntity.Id, ct);
+            await _categoryService.AddRangeAsync(product.CategoryIds, productEntity.Id, ct);
+            
+            CreateStockMovementDto createStockMovement = new()
+            {
+                ProductId = productEntity.Id,
+                Description = "Entrada de produto",
+                MovementType = MovementType.Entry,
+                Quantity = product.Quantity,
+            };
+
+            var StockMovement = new StockMovement(StockMovementMapper.ToCreateStockMovementDTO(createStockMovement, productEntity, token.UserId));
+            StockMovement.Validate();
+            await stockMovementRepository.AddAsync(StockMovement, ct);
 
             return productEntity;
         }

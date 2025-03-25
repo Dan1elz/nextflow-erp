@@ -20,7 +20,6 @@ namespace dotnet_api_erp.src.Application.DTOs
             public required string Name { get; set;}
             public required string Description { get; set;}
             public required IFormFile Image { get; set;}
-            public int Quantity { get; set;}
             public double Price { get; set;}
             public DateOnly Validity { get; set;}
             public List<Guid>? CategoryIds { get; set;} 
