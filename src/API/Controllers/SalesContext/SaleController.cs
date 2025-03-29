@@ -35,7 +35,7 @@ namespace dotnet_api_erp.src.API.Controllers.SalesContext
             throw new BadRequestException("Erro ao criar Venda");
         }
         [HttpGet]
-        public async Task<IActionResult> GetVendas(CancellationToken ct, [FromQuery] int offset = 0, [FromQuery] int pageSize = 10)
+        public async Task<IActionResult> GetSales(CancellationToken ct, [FromQuery] int offset = 0, [FromQuery] int pageSize = 10)
         {
             var response = await _service.GetAllAsync(x => true, offset, pageSize, ct);
             if (response != null)

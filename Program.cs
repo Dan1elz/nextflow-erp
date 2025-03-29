@@ -1,6 +1,7 @@
 using System.Text;
 using dotnet_api_erp.src.API.Middlewares;
 using dotnet_api_erp.src.Application.Services.ProductContext;
+using dotnet_api_erp.src.Application.Services.SalesContext;
 using dotnet_api_erp.src.Application.Services.UserContext;
 using dotnet_api_erp.src.Application.Utils;
 using dotnet_api_erp.src.Domain.Interfaces.ProductContext;
@@ -110,6 +111,11 @@ namespace dotnet_api_erp
             builder.Services.AddScoped<SupplierService>();
             builder.Services.AddScoped<StockMovementService>();
 
+            // *** CONTEXTO DE SALES - SERVICES ***
+            builder.Services.AddScoped<ClientService>();
+            builder.Services.AddScoped<OrderService>();
+            builder.Services.AddScoped<SaleService>();
+
             builder.Services.AddHttpContextAccessor();
 
             // *** CONTEXTO DE USER - REPOSITORIES ***
@@ -155,12 +161,20 @@ namespace dotnet_api_erp
                 app.UseHsts();
             }
 
-             // *** CONFIGURAÇÃO DE ARQUIVOS ESTÁTICOS ***
+            // *** CONFIGURAÇÃO DE ARQUIVOS ESTÁTICOS ***
+            var assetsPath = Path.Combine(Directory.GetCurrentDirectory(), "assets");
+
+            // Verifica se a pasta "assets" existe. Se não, cria a pasta.
+            if (!Directory.Exists(assetsPath))
+            {
+                Directory.CreateDirectory(assetsPath);
+            }
+
             app.UseStaticFiles(new StaticFileOptions
             {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "assets")),
+                FileProvider = new PhysicalFileProvider(assetsPath),
                 RequestPath = "/assets"
-            });	
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

@@ -12,6 +12,9 @@ namespace dotnet_api_erp.src.Application.Utils
             var extension = Path.GetExtension(img.FileName).ToLower();
             if (!allowedExtensions.Contains(extension)) throw new Exception("A extensão do arquivo não é permitida");
 
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
             var fileName = $"{Guid.NewGuid()}{extension}";
             var filePath = Path.Combine(path, fileName);
             using (var stream = new FileStream(filePath, FileMode.Create))

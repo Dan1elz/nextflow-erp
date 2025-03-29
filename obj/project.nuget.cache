@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Awjs2ITmElA=",
+  "dgSpecHash": "p2sBa6euBFY=",
   "success": true,
-  "projectFilePath": "C:\\xampp\\htdocs\\projetos\\Dotnet\\nextflow-erp\\main\\nextflow-erp\\dotnet-api-erp.csproj",
+  "projectFilePath": "C:\\xampp\\htdocs\\projetos\\Dotnet\\nextflow-erp\\dotnet-api-erp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\danie\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\danie\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
