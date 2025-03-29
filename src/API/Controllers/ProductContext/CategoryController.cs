@@ -25,12 +25,12 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
                 return Ok(new ApiResponse<Category>
                 {
                     Status = 201,
-                    Message = "Sucesso ao criar endereço",
+                    Message = "Sucesso ao criar categoria",
                     Data = response
                 });
             }
 
-            throw new BadRequestException("Erro ao criar endereço");
+            throw new BadRequestException("Erro ao criar categoria");
         }
         [HttpGet]
         public async Task<IActionResult> GetCategoryes(CancellationToken ct, [FromQuery] int offset = 0, [FromQuery] int pageSize = 10)
@@ -39,7 +39,7 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
             if (response != null)
                 return Ok(response);
             
-            throw new BadRequestException("Erro ao pegar dados do endereço");
+            throw new BadRequestException("Erro ao pegar dados do categoria");
         }
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetCategoryById(Guid Id, CancellationToken ct)
@@ -50,12 +50,12 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
                 return Ok(new ApiResponse<Category>
                 {
                     Status = 201,
-                    Message = "Sucesso ao pegar dados do endereço",
+                    Message = "Sucesso ao pegar dados do categoria",
                     Data = response
                 });
             }
 
-            throw new BadRequestException("Erro ao pegar dados do endereço");
+            throw new BadRequestException("Erro ao pegar dados do categoria");
         }
         [HttpPut("{Id}")]
         public async Task<IActionResult> UpdateCategory(Guid Id, UpdateCategoryDTO Category, CancellationToken ct)
@@ -66,12 +66,12 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
                 return Ok(new ApiResponse<Category>
                 {
                     Status = 201,
-                    Message = "Sucesso ao atualizar dados do endereço",
+                    Message = "Sucesso ao atualizar dados do categoria",
                     Data = response
                 });
             }
 
-            throw new BadRequestException("Erro ao atualizar dados do endereço");
+            throw new BadRequestException("Erro ao atualizar dados do categoria");
         }
         [HttpDelete]
         public async Task<IActionResult> DeleteCategory(ListIdsGuidDto dto, CancellationToken ct)
@@ -84,7 +84,7 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
             return Ok(new ApiResponseMessage
             {
                 Status = 201,
-                Message = "Sucesso ao excluir endereços",
+                Message = "Sucesso ao excluir categorias",
             });
         }
         [HttpGet("Exportar")]

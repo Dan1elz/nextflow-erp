@@ -15,6 +15,7 @@ namespace dotnet_api_erp.src.Domain.Entities.SalesContext
         [ForeignKey("User"), Required(ErrorMessage = "Por favor insira o Id do Usuario")]
         public Guid UserId {get; set;}
         public virtual User? User {get; set;}
+        public virtual ICollection<Payment> Payments { get; set; } = [];
         private Sale() { }
         public Sale(CreateSaleDTO dto) : base()
         {

@@ -45,12 +45,12 @@ namespace dotnet_api_erp.src.Application.Services.Base
             var deleteMethod = typeof(TEntity).GetMethod("Delete", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
             if (deleteMethod != null)
             {
-            deleteMethod.Invoke(entity, null);
-            await _repository.Update(entity, ct);
+                deleteMethod.Invoke(entity, null);
+                await _repository.Update(entity, ct);
             }
             else
             {
-            await _repository.Remove(entity, ct);
+                await _repository.Remove(entity, ct);
             }
         }
         public virtual Task DeleteRangeAsync(List<Guid> Ids, CancellationToken ct)

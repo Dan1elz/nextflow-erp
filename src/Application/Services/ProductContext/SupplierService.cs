@@ -18,7 +18,7 @@ namespace dotnet_api_erp.src.Application.Services.ProductContext
     {
         public async Task<Supplier> UpdateAsync(Guid Id, UpdateSupplierDTO supplier, CancellationToken ct)
         {
-            var supplierToUpdate = await _repository.GetByIdAsync(Id, ct) ?? throw new NotFoundException("Usuario não encontrado");
+            var supplierToUpdate = await _repository.GetByIdAsync(Id, ct) ?? throw new NotFoundException("Fornecedor não encontrado");
 
             supplierToUpdate.Update(supplier);
             await _repository.Update(supplierToUpdate, ct);
@@ -40,6 +40,11 @@ namespace dotnet_api_erp.src.Application.Services.ProductContext
             }
             supplier.Delete();
             await repository.Update(supplier, ct);
+        }
+        public async override Task DeleteRangeAsync(List<Guid> Ids, CancellationToken ct)
+        {
+            var tasks = Ids.Select(Id => DeleteAsync(Id, ct));
+            await Task.WhenAll(tasks);
         }
         public async Task<byte[]?> Exportar(ListIdsGuidDto? dto, CancellationToken ct)
         {

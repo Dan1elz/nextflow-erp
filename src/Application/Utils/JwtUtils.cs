@@ -55,7 +55,6 @@ namespace dotnet_api_erp.src.Application.Utils
                 return false;
             }
         }
-
         public class JwtSettingsUseCase
         {
             public required string Key { get; set; }

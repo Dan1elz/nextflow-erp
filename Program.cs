@@ -35,8 +35,8 @@ namespace dotnet_api_erp
                 policy
                 .AllowAnyOrigin()
                 .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials();
+                .AllowAnyMethod();
+                // .AllowCredentials();
             }));
 
             // *** CONFIGURAÇÃO DO SWAGGER ***
@@ -158,7 +158,7 @@ namespace dotnet_api_erp
              // *** CONFIGURAÇÃO DE ARQUIVOS ESTÁTICOS ***
             app.UseStaticFiles(new StaticFileOptions
             {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "assets")),
                 RequestPath = "/assets"
             });	
 

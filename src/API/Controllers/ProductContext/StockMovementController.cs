@@ -27,12 +27,12 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
                 return Ok(new ApiResponse<StockMovement>
                 {
                     Status = 201,
-                    Message = "Sucesso ao criar endereço",
+                    Message = "Sucesso ao criar movimentação de estoque",
                     Data = response
                 });
             }
 
-            throw new BadRequestException("Erro ao criar endereço");
+            throw new BadRequestException("Erro ao criar movimentação de estoque");
         }
         [HttpGet]
         public async Task<IActionResult> GetStockMovementes(CancellationToken ct, [FromQuery] int offset = 0, [FromQuery] int pageSize = 10)
@@ -41,7 +41,7 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
             if (response != null)
                 return Ok(response);
             
-            throw new BadRequestException("Erro ao pegar dados do endereço");
+            throw new BadRequestException("Erro ao pegar dados do movimentação de estoque");
         }
         [HttpGet("product/{Id}")]
         public async Task<IActionResult> GetStockMovementesByProduct(Guid Id, CancellationToken ct, [FromQuery] int offset = 0, [FromQuery] int pageSize = 10)
@@ -50,7 +50,7 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
             if (response != null)
                 return Ok(response);
             
-            throw new BadRequestException("Erro ao pegar dados do endereço");
+            throw new BadRequestException("Erro ao pegar dados do movimentação de estoque");
         }
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetStockMovementById(Guid Id, CancellationToken ct)
@@ -61,14 +61,13 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
                 return Ok(new ApiResponse<StockMovement>
                 {
                     Status = 201,
-                    Message = "Sucesso ao pegar dados do endereço",
+                    Message = "Sucesso ao pegar dados do movimentação de estoque",
                     Data = response
                 });
             }
 
-            throw new BadRequestException("Erro ao pegar dados do endereço");
+            throw new BadRequestException("Erro ao pegar dados do movimentação de estoque");
         }
-        
         [HttpDelete]
         public async Task<IActionResult> DeleteStockMovement(ListIdsGuidDto dto, CancellationToken ct)
         {
@@ -80,7 +79,7 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
             return Ok(new ApiResponseMessage
             {
                 Status = 201,
-                Message = "Sucesso ao excluir endereços",
+                Message = "Sucesso ao excluir movimentação de estoques",
             });
         }
     }

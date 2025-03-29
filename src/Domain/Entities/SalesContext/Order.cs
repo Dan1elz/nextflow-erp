@@ -12,7 +12,7 @@ namespace dotnet_api_erp.src.Domain.Entities.SalesContext
         public Guid ClientId { get; set; }
         public virtual Client? Client { get; set; }
         [Required(ErrorMessage = "O Status do Pedido é obrigatório.")]
-        public OrderStatus OrderStatus {get; set;}
+        public OrderStatus OrderStatus {get; set;} = OrderStatus.PendingPayment;
         [Range(0.01, double.MaxValue, ErrorMessage = "O valor total deve ser maior que zero.")]
         [Required(ErrorMessage = "O valor total é obrigatório.")]
         public double TotalAmount {get; set;}
@@ -23,9 +23,14 @@ namespace dotnet_api_erp.src.Domain.Entities.SalesContext
             ClientId = dto.ClientId;
             TotalAmount = dto.TotalAmount;
         }
-        public void Update(UpdateOrderDTO dto)
+        public new void Delete()
         {
-            OrderStatus = dto.Status;
+           base.Delete();
+           OrderStatus = OrderStatus.Canceled;
+        } 
+        public void Update(OrderStatus orderStatus)
+        {
+            OrderStatus = orderStatus;
             base.Update();
         }
     }

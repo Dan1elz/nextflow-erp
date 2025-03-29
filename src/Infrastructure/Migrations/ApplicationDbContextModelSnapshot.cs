@@ -107,6 +107,10 @@ namespace dotnet_api_erp.src.Infrastructure.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("double precision");
 
+                    b.Property<string>("ProductCode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
@@ -631,7 +635,7 @@ namespace dotnet_api_erp.src.Infrastructure.Migrations
             modelBuilder.Entity("dotnet_api_erp.src.Domain.Entities.ProductContext.StockMovement", b =>
                 {
                     b.HasOne("dotnet_api_erp.src.Domain.Entities.ProductContext.Product", "Product")
-                        .WithMany()
+                        .WithMany("StockMovement")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -650,7 +654,7 @@ namespace dotnet_api_erp.src.Infrastructure.Migrations
             modelBuilder.Entity("dotnet_api_erp.src.Domain.Entities.SalesContext.Order", b =>
                 {
                     b.HasOne("dotnet_api_erp.src.Domain.Entities.SalesContext.Client", "Client")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -661,7 +665,7 @@ namespace dotnet_api_erp.src.Infrastructure.Migrations
             modelBuilder.Entity("dotnet_api_erp.src.Domain.Entities.SalesContext.OrderItem", b =>
                 {
                     b.HasOne("dotnet_api_erp.src.Domain.Entities.SalesContext.Order", "Order")
-                        .WithMany()
+                        .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -680,7 +684,7 @@ namespace dotnet_api_erp.src.Infrastructure.Migrations
             modelBuilder.Entity("dotnet_api_erp.src.Domain.Entities.SalesContext.Payment", b =>
                 {
                     b.HasOne("dotnet_api_erp.src.Domain.Entities.SalesContext.Sale", "Sale")
-                        .WithMany()
+                        .WithMany("Payments")
                         .HasForeignKey("SaleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -710,7 +714,7 @@ namespace dotnet_api_erp.src.Infrastructure.Migrations
             modelBuilder.Entity("dotnet_api_erp.src.Domain.Entities.UserContext.Address", b =>
                 {
                     b.HasOne("dotnet_api_erp.src.Domain.Entities.UserContext.User", "User")
-                        .WithMany()
+                        .WithMany("Addresses")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -721,7 +725,7 @@ namespace dotnet_api_erp.src.Infrastructure.Migrations
             modelBuilder.Entity("dotnet_api_erp.src.Domain.Entities.UserContext.Contact", b =>
                 {
                     b.HasOne("dotnet_api_erp.src.Domain.Entities.UserContext.User", "User")
-                        .WithMany()
+                        .WithMany("Contacts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -748,11 +752,35 @@ namespace dotnet_api_erp.src.Infrastructure.Migrations
             modelBuilder.Entity("dotnet_api_erp.src.Domain.Entities.ProductContext.Product", b =>
                 {
                     b.Navigation("CategoryProduct");
+
+                    b.Navigation("StockMovement");
                 });
 
             modelBuilder.Entity("dotnet_api_erp.src.Domain.Entities.ProductContext.Supplier", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("dotnet_api_erp.src.Domain.Entities.SalesContext.Client", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("dotnet_api_erp.src.Domain.Entities.SalesContext.Order", b =>
+                {
+                    b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("dotnet_api_erp.src.Domain.Entities.SalesContext.Sale", b =>
+                {
+                    b.Navigation("Payments");
+                });
+
+            modelBuilder.Entity("dotnet_api_erp.src.Domain.Entities.UserContext.User", b =>
+                {
+                    b.Navigation("Addresses");
+
+                    b.Navigation("Contacts");
                 });
 #pragma warning restore 612, 618
         }
