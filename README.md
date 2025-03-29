@@ -49,7 +49,7 @@ A API estará disponível em: `http://localhost:5001`.
 Você pode testar os endpoints utilizando ferramentas como **Postman** ou **Swagger**.
 Se a API tiver **Swagger** configurado, acesse:
 ```
-http://localhost:5001/swagger
+[http://localhost:5001/index.html](http://localhost:5001/index.html)
 ```
 
 ## 📊 Diagrama do Banco de Dados
