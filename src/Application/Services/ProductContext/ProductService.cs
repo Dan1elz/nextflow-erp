@@ -24,9 +24,10 @@ namespace dotnet_api_erp.src.Application.Services.ProductContext
         private readonly ImageUtils _imageUtils = imageUtils;
         private readonly CategoryService _categoryService = categoryService;
         private readonly string filePath = "assets/images/products";
+        
         public async Task<Product> UpdateAsync(Guid Id, UpdateProductDto product, CancellationToken ct)
         {
-            var productToUpdate = await _repository.GetByIdAsync(Id, ct) ?? throw new NotFoundException("Usuario não encontrado");
+            var productToUpdate = await _repository.GetByIdAsync(Id, ct) ?? throw new NotFoundException("Produto não encontrado");
             var fileName = "";
             if (product.Image != null)
             {
@@ -68,13 +69,18 @@ namespace dotnet_api_erp.src.Application.Services.ProductContext
         }
         public async override Task DeleteAsync(Guid Id, CancellationToken ct)
         {
-            Product Product = await repository.GetByIdAsync(Id, ct) ?? throw new NotFoundException("Fornecedor não encontrado");
+            Product Product = await repository.GetByIdAsync(Id, ct) ?? throw new NotFoundException("Produto não encontrado");
             if (Product.Quantity > 0)
             {
                 throw new BadRequestException("Não é possível excluir o produto, pois existem produtos ativos associados a ele.");
             }
             Product.Delete();
             await repository.Update(Product, ct);
+        }
+        public async override Task DeleteRangeAsync(List<Guid> Ids, CancellationToken ct)
+        {
+            var tasks = Ids.Select(Id => DeleteAsync(Id, ct));
+            await Task.WhenAll(tasks);
         }
         public async Task<byte[]?> Exportar(ListIdsGuidDto? dto, CancellationToken ct)
         {

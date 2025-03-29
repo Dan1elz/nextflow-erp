@@ -28,12 +28,12 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
                 return Ok(new ApiResponse<Product>
                 {
                     Status = 201,
-                    Message = "Sucesso ao criar endereço",
+                    Message = "Sucesso ao criar produto",
                     Data = response
                 });
             }
 
-            throw new BadRequestException("Erro ao criar endereço");
+            throw new BadRequestException("Erro ao criar produto");
         }
         [HttpGet]
         public async Task<IActionResult> GetProductes(CancellationToken ct, [FromQuery] int offset = 0, [FromQuery] int pageSize = 10)
@@ -42,7 +42,7 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
             if (response != null)
                 return Ok(response);
             
-            throw new BadRequestException("Erro ao pegar dados do endereço");
+            throw new BadRequestException("Erro ao pegar dados do produto");
         }
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetProductById(Guid Id, CancellationToken ct)
@@ -53,12 +53,12 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
                 return Ok(new ApiResponse<Product>
                 {
                     Status = 201,
-                    Message = "Sucesso ao pegar dados do endereço",
+                    Message = "Sucesso ao pegar dados do produto",
                     Data = response
                 });
             }
 
-            throw new BadRequestException("Erro ao pegar dados do endereço");
+            throw new BadRequestException("Erro ao pegar dados do produto");
         }
         [HttpPut("{Id}")]
         public async Task<IActionResult> UpdateProduct(Guid Id, [FromForm] UpdateProductDto Product, CancellationToken ct)
@@ -69,12 +69,12 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
                 return Ok(new ApiResponse<Product>
                 {
                     Status = 201,
-                    Message = "Sucesso ao atualizar dados do endereço",
+                    Message = "Sucesso ao atualizar dados do produto",
                     Data = response
                 });
             }
 
-            throw new BadRequestException("Erro ao atualizar dados do endereço");
+            throw new BadRequestException("Erro ao atualizar dados do produto");
         }
         [HttpDelete]
         public async Task<IActionResult> DeleteProduct(ListIdsGuidDto dto, CancellationToken ct)
@@ -87,7 +87,7 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
             return Ok(new ApiResponseMessage
             {
                 Status = 201,
-                Message = "Sucesso ao excluir endereços",
+                Message = "Sucesso ao excluir produtos",
             });
         }
         [HttpGet("Exportar")]

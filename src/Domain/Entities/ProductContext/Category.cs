@@ -9,7 +9,7 @@ namespace dotnet_api_erp.src.Domain.Entities.ProductContext
         [StringLength(100, ErrorMessage = "A Descrição deve ter no maximo 100 caracteres")]
         [Required(ErrorMessage = "A Descrição é obrigatória")]
         public string Description { get; set; } = string.Empty;
-        public virtual ICollection<CategoryProduct> CategoryProduct { get; set; } = new List<CategoryProduct>();
+        public virtual ICollection<CategoryProduct> CategoryProduct { get; set; } = [];
         
         private Category() { }
 

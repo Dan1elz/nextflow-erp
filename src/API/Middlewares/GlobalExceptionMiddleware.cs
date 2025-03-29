@@ -20,7 +20,6 @@ namespace dotnet_api_erp.src.API.Middlewares
                 await HandleExceptionAsync(context, ex);
             }
         }
-
         private static Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
             var response = context.Response;
@@ -55,9 +54,7 @@ namespace dotnet_api_erp.src.API.Middlewares
                     Console.WriteLine(ex.Message);
                     break;
             }
-
             response.StatusCode = statusCode;
-
             var result = JsonSerializer.Serialize(new ApiResponseMessage
             {
                 Status = statusCode,
@@ -67,6 +64,5 @@ namespace dotnet_api_erp.src.API.Middlewares
 
             return response.WriteAsync(result);
         }
-
     }  
 }

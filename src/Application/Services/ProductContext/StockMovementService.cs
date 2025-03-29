@@ -8,11 +8,14 @@ using dotnet_api_erp.src.Domain.Enums;
 using dotnet_api_erp.src.Domain.Interfaces.ProductContext;
 using dotnet_api_erp.src.Infrastructure.Data;
 
+#pragma warning disable CS9107
+
 namespace dotnet_api_erp.src.Application.Services.ProductContext
 {
     public class StockMovementService(IStockMovementRepository repository, IProductRepository productRepository, ApplicationDbContext context) : BaseService<StockMovement, IStockMovementRepository>(repository, context)
     {
         private readonly IProductRepository _productRepository = productRepository;
+        
         public async Task<StockMovement> AddAsync(CreateStockMovementDto stockMovement, RefreshToken token, CancellationToken ct)
         {
             var product = await _productRepository.GetByIdAsync(stockMovement.ProductId, ct) ?? throw new NotFoundException("Produto não encontrado.");
@@ -53,12 +56,17 @@ namespace dotnet_api_erp.src.Application.Services.ProductContext
         public async override Task DeleteAsync(Guid Id, CancellationToken ct)
         {
             StockMovement entity = await _repository.GetByIdAsync(Id, ct) 
-                ?? throw new NotFoundException("Fornecedor não encontrado");
+                ?? throw new NotFoundException("Movimentação de Estoque não encontrada");
             
             if (entity.CreateAt.AddHours(24) <= DateTime.UtcNow)
                 throw new BadRequestException("Não é possível excluir movimentações criadas há mais de 24 horas.");
                
             await _repository.Remove(entity, ct);
+        }
+        public async override Task DeleteRangeAsync(List<Guid> Ids, CancellationToken ct)
+        {
+            var tasks = Ids.Select(Id => DeleteAsync(Id, ct));
+            await Task.WhenAll(tasks);
         }
     }
 }

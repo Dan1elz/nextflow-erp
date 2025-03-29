@@ -4,10 +4,7 @@ namespace dotnet_api_erp.src.Domain.Enums
     {
         PendingPayment = 1,   // Aguardando pagamento
         PaymentConfirmed = 2, // Pagamento confirmado
-        Processing = 3,       // Pedido em processamento
-        Shipped = 4,          // Pedido enviado
-        Delivered = 5,        // Pedido entregue
-        Canceled = 6,         // Pedido cancelado
-        Refunded = 7          // Pedido reembolsado
+        Canceled = 3,         // Pedido cancelado
+        Refunded = 4          // Pedido reembolsado
     }
 }

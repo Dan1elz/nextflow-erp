@@ -32,7 +32,7 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
                 });
             }
 
-            throw new BadRequestException("Erro ao criar usuario");
+            throw new BadRequestException("Erro ao criar usuário");
         }
         [HttpPost("Login")]
         public async Task<IActionResult> LoginUser(LoginUserDto user, CancellationToken ct)
@@ -48,7 +48,7 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
                 });
             }
 
-            throw new BadRequestException("Erro ao logar usuario");
+            throw new BadRequestException("Erro ao logar usuário");
         }
         [Authorize]
         [HttpPost("Logout")]
@@ -136,7 +136,7 @@ namespace dotnet_api_erp.src.API.Controllers.UserContext
             return Ok(new ApiResponseMessage
             {
                 Status = 201,
-                Message = "Sucesso ao excluir usuarios",
+                Message = "Sucesso ao excluir usuários",
             });
         }
         [Authorize]

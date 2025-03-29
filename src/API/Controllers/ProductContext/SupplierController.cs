@@ -25,12 +25,12 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
                 return Ok(new ApiResponse<Supplier>
                 {
                     Status = 201,
-                    Message = "Sucesso ao criar endereço",
+                    Message = "Sucesso ao criar fornecedores",
                     Data = response
                 });
             }
 
-            throw new BadRequestException("Erro ao criar endereço");
+            throw new BadRequestException("Erro ao criar fornecedores");
         }
         [HttpGet]
         public async Task<IActionResult> GetSupplieres(CancellationToken ct, [FromQuery] int offset = 0, [FromQuery] int pageSize = 10)
@@ -39,7 +39,7 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
             if (response != null)
                 return Ok(response);
             
-            throw new BadRequestException("Erro ao pegar dados do endereço");
+            throw new BadRequestException("Erro ao pegar dados do fornecedores");
         }
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetSupplierById(Guid Id, CancellationToken ct)
@@ -50,12 +50,12 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
                 return Ok(new ApiResponse<Supplier>
                 {
                     Status = 201,
-                    Message = "Sucesso ao pegar dados do endereço",
+                    Message = "Sucesso ao pegar dados do fornecedores",
                     Data = response
                 });
             }
 
-            throw new BadRequestException("Erro ao pegar dados do endereço");
+            throw new BadRequestException("Erro ao pegar dados do fornecedores");
         }
         [HttpPut("{Id}")]
         public async Task<IActionResult> UpdateSupplier(Guid Id, UpdateSupplierDTO Supplier, CancellationToken ct)
@@ -66,12 +66,12 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
                 return Ok(new ApiResponse<Supplier>
                 {
                     Status = 201,
-                    Message = "Sucesso ao atualizar dados do endereço",
+                    Message = "Sucesso ao atualizar dados do fornecedores",
                     Data = response
                 });
             }
 
-            throw new BadRequestException("Erro ao atualizar dados do endereço");
+            throw new BadRequestException("Erro ao atualizar dados do fornecedores");
         }
         [HttpDelete]
         public async Task<IActionResult> DeleteSupplier(ListIdsGuidDto dto, CancellationToken ct)
@@ -84,7 +84,7 @@ namespace dotnet_api_erp.src.API.Controllers.ProductContext
             return Ok(new ApiResponseMessage
             {
                 Status = 201,
-                Message = "Sucesso ao excluir endereços",
+                Message = "Sucesso ao excluir fornecedoress",
             });
         }
         [HttpGet("Exportar")]

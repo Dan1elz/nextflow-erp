@@ -17,7 +17,7 @@ namespace dotnet_api_erp.src.Domain.Entities.SalesContext
         [Range(0.0, double.MaxValue, ErrorMessage = "O preço deve ser um valor positivo")]
         [Required(ErrorMessage = "Por favor, insira o valor do pagamento.")]
         public double Amount { get; set; }
-        private Payment() { }
+        public Payment() : base() {}
         public Payment(CreatePaymentDTO dto) : base()
         {
             SaleId = dto.SaleId;

@@ -63,7 +63,6 @@ namespace dotnet_api_erp.src.Application.Services.UserContext
         {
             return await _repository.GetByIdAsync(Id, ct,includeExpression: x => x.Include(u => u.Addresses).Include(u => u.Contacts) ) ?? throw new NotFoundException("Entity not found");
         }
-
         public async Task<byte[]?> Exportar(ListIdsGuidDto? dto, CancellationToken ct)
         {
             Expression<Func<User, bool>> expression = x => true;

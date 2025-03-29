@@ -9,6 +9,8 @@ using dotnet_api_erp.src.Infrastructure.Data;
 using static dotnet_api_erp.src.Application.DTOs.SharedDto;
 using static dotnet_api_erp.src.Domain.DTOs.ProducContext.CategoryDTO;
 
+#pragma warning disable CS9107
+
 namespace dotnet_api_erp.src.Application.Services.ProductContext
 {
     public class CategoryService(ICategoryRepository repository,ICategoryProductRepository categoryProductRepository, ApplicationDbContext context) : BaseService<Category, ICategoryRepository>(repository, context)
@@ -17,7 +19,7 @@ namespace dotnet_api_erp.src.Application.Services.ProductContext
 
         public async Task<Category> UpdateAsync(Guid Id, UpdateCategoryDTO category, CancellationToken ct)
         {
-            var categoryToUpdate = await _repository.GetByIdAsync(Id, ct) ?? throw new NotFoundException("Categoria não encontrado");
+            var categoryToUpdate = await _repository.GetByIdAsync(Id, ct) ?? throw new NotFoundException("Categoria não encontrada");
 
             categoryToUpdate.Update(category);
             await _repository.Update(categoryToUpdate, ct);
