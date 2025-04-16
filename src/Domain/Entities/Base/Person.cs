@@ -11,8 +11,8 @@ namespace dotnet_api_erp.src.Domain.Entities.Base
         [StringLength(255, ErrorMessage = "O Email deve ter no máximo 255 caracteres."), EmailAddress(ErrorMessage = "E-mail inválido"), Required(ErrorMessage = "Informe o email")]
         public string Email { get; set; } = createPersonDTO.Email;
 
-        [StringLength(11, MinimumLength = 11, ErrorMessage = "O CPF deve ter exatamente 14 caracteres.")]
-        public string Cpf { get; set; } = string.Empty; 
+        [StringLength(14, MinimumLength = 11, ErrorMessage = "O CPF deve ter exatamente 11 caracteres.")]
+        public string Cpf { get; set; } = createPersonDTO.Cpf;
         public DateOnly? BirthDate { get; set; } = createPersonDTO.BirthDate;
 
         public static bool ValidateCPF(string cpf)
